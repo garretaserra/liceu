@@ -1,0 +1,119 @@
+Waking up: 2022-02-15 19:46:51.736301
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 has been reserved at: 2022-02-15 19:47:22.935424
+L0__45442_38_2_2 has been reserved at: 2022-02-15 19:47:23.033424
+L0__45497_69_3_3 has been reserved at: 2022-02-15 19:47:41.130276
+L0__45497_69_3_2 has been reserved at: 2022-02-15 19:47:41.222273
+Waking up: 2022-02-15 19:48:09.939376
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:49:24.380714
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:50:38.358606
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:51:52.600002
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:53:06.734359
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:54:21.449490
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:55:19.888518
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:56:36.035137
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:57:49.687095
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 19:59:08.261937
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 20:00:22.016251
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 20:01:36.192496
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 20:02:50.139821
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 20:04:03.824440
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 20:05:17.714733
+L0__45514_70_3_2 has been reserved at: 2022-02-15 20:05:32.049841
+L0__45514_70_3_3 has been reserved at: 2022-02-15 20:05:32.120660
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
+Waking up: 2022-02-15 20:06:34.036581
+L0__45514_70_3_2 is occupied
+L0__45514_70_3_3 is occupied
+L0__45442_38_2_1 is occupied
+L0__45442_38_2_2 is occupied
+L0__45497_69_3_3 is occupied
+L0__45497_69_3_2 is occupied
