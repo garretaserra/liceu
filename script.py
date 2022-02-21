@@ -34,9 +34,10 @@ while 1:
     ser = Service(chromeDriverPath)
     driver = webdriver.Chrome(service=ser, options=chromeOptions)
     for event in events:
-        driver.get(baseUrl + str(event.eventId))
-        time.sleep(10)  # Time to load web page
         try:
+            driver.get(baseUrl + str(event.eventId))
+            time.sleep(10)  # Time to load web page
+        
             cookies = driver.find_element(By.ID, 'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelectionWrapper')
             cookies.click()
             time.sleep(2)
