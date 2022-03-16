@@ -11,14 +11,17 @@ class Event:
         self.seats = seats
 
 events = []
-## Don Giovani
+# Don Giovani
 events.append(Event(45514, ['L0__45514_70_3_2', 'L0__45514_70_3_3']))
 
-## Figaro
+# Figaro
 events.append(Event(45442, ['L0__45442_38_2_1', 'L0__45442_38_2_2']))
 
-## Fan Tutte
+# Fan Tutte
 events.append(Event(45497, ['L0__45497_69_3_3', 'L0__45497_69_3_2']))
+
+# Flauta Magica
+events.append(Event(45455, ['L0__45455_67_3_2', 'L0__45455_67_3_3', 'L0__45455_238_1_3', 'L0__45455_238_1_2']))
 
 chromeDriverPath = 'C:\Program Files\ChromeDriver\chromedriver.exe'
 chromeOptions = Options()
