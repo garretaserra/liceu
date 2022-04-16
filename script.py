@@ -3,25 +3,21 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.remote_connection import LOGGER
+import logging
 import time
 
+# Reduce verbosity of chrome driver
+LOGGER.setLevel(logging.ERROR)
 class Event:
     def __init__(self, eventId, seats):
         self.eventId = eventId
         self.seats = seats
 
 events = []
-# Don Giovani
-events.append(Event(45514, ['L0__45514_70_3_2', 'L0__45514_70_3_3']))
-
-# Figaro
-events.append(Event(45442, ['L0__45442_38_2_1', 'L0__45442_38_2_2']))
-
-# Fan Tutte
-events.append(Event(45497, ['L0__45497_69_3_3', 'L0__45497_69_3_2']))
 
 # Flauta Magica
-events.append(Event(45455, ['L0__45455_67_3_2', 'L0__45455_67_3_3', 'L0__45455_238_1_3', 'L0__45455_238_1_2']))
+events.append(Event(45455, ['L0__45455_67_3_1', 'L0__45455_67_3_2', 'L0__45455_67_3_3', 'L0__45455_238_1_3', 'L0__45455_238_1_2', 'L0__45455_238_1_1']))
 
 chromeDriverPath = 'C:\Program Files\ChromeDriver\chromedriver.exe'
 chromeOptions = Options()
@@ -56,10 +52,10 @@ while 1:
                 status = seat.get_attribute('class')
                 if status == 'o':
                     # Seat is occupied
-                    log.write(seatId + ' is occupied\n')
+                    log.write(str(seatId) + ' is occupied\n')
                 elif status != 'a':
                     # Seat in unknown state
-                    log.write(seatId + ' is in unknown state: ' + status + '\n')
+                    log.write(str(seatId) + ' is in unknown state: ' + status + '\n')
                 elif status == 'a':
                     # Click seat
                     seat.click()
@@ -67,12 +63,15 @@ while 1:
                     # Confirm low visibility pop up
                     #ok_btn = driver.find_elements_by_tag_name('button').pop()
                     #ok_btn.click()
-                    log.write(seatId + ' has been reserved at: ' + datetime.now().__str__() + '\n')
+                    log.write(str(event.eventId) + '\t' + str(seatId) + ' has been reserved at: ' + datetime.now().__str__() + '\n')
 
             # Click on continue (with purchase)
             cont_btn = driver.find_element(By.CLASS_NAME, 'Lboto2')
-            cont_btn.click()
-            print('Reserved seats correctly')
+            if cont_btn.is_displayed():
+                cont_btn.click()
+                print('Reserved seats correctly')
+            else:
+                print('ERROR: Couldn\'t find buy button')
             time.sleep(5)
 
         except Exception as e:
@@ -80,6 +79,6 @@ while 1:
 
     log.close()
     driver.quit()
-    time.sleep(20)
+    time.sleep(1)
 
 print('Exiting...')
