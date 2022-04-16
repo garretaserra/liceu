@@ -4,11 +4,13 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.remote_connection import LOGGER
+from selenium.common.exceptions import NoSuchElementException
 import logging
 import time
 
 # Reduce verbosity of chrome driver
 LOGGER.setLevel(logging.ERROR)
+
 class Event:
     def __init__(self, eventId, seats):
         self.eventId = eventId
@@ -16,12 +18,17 @@ class Event:
 
 events = []
 
-# Flauta Magica
+# Flauta Magica 21 juny
 events.append(Event(45455, ['L0__45455_67_3_1', 'L0__45455_67_3_2', 'L0__45455_67_3_3', 'L0__45455_238_1_3', 'L0__45455_238_1_2', 'L0__45455_238_1_1']))
+
+# Norma 19 Juliol
+events.append(Event(45474, ['L0__45474_69_3_1', 'L0__45474_69_3_2', 'L0__45474_69_3_3']))
 
 chromeDriverPath = 'C:\Program Files\ChromeDriver\chromedriver.exe'
 chromeOptions = Options()
 chromeOptions.add_argument("--headless")
+chromeOptions.add_argument("--log-level=2")
+chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 print('Starting...')
 
@@ -40,12 +47,17 @@ while 1:
             cookies = driver.find_element(By.ID, 'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelectionWrapper')
             cookies.click()
             time.sleep(2)
+
+        except NoSuchElementException as e:
+            pass
         
         except Exception as e:
-            pass
+            log.write('Exception raised: ' + str(e) + '\n')
+            print(e)
 
         # Check connection
         try:
+            seats_reserved = []
             for seatId in event.seats:
                 # Check seat availability
                 seat = driver.find_element(By.ID, seatId)
@@ -63,19 +75,22 @@ while 1:
                     # Confirm low visibility pop up
                     #ok_btn = driver.find_elements_by_tag_name('button').pop()
                     #ok_btn.click()
-                    log.write(str(event.eventId) + '\t' + str(seatId) + ' has been reserved at: ' + datetime.now().__str__() + '\n')
+                    log.write(str(seatId) + '\t' + ' has been reserved at: ' + str(datetime.now()) + '\n')
+                    seats_reserved.append(seatId)
 
-            # Click on continue (with purchase)
-            cont_btn = driver.find_element(By.CLASS_NAME, 'Lboto2')
-            if cont_btn.is_displayed():
-                cont_btn.click()
-                print('Reserved seats correctly')
-            else:
-                print('ERROR: Couldn\'t find buy button')
-            time.sleep(5)
+            if len(seats_reserved) > 0:
+                # Click on continue (with purchase)
+                cont_btn = driver.find_element(By.CLASS_NAME, 'Lboto2')
+                if cont_btn.is_displayed():
+                    cont_btn.click()
+                    print(str(datetime.now()), 'Reserved seats:', '\t'.join(str(x) for x in seats_reserved))
+                else:
+                    print('ERROR: Couldn\'t find buy button')
+                time.sleep(5)
 
         except Exception as e:
             log.write('Exception raised: ' + str(e) + '\n')
+            print(e)
 
     log.close()
     driver.quit()
