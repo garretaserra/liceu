@@ -18,11 +18,13 @@ class Event:
 
 events = []
 
-# Flauta Magica 21 juny
-events.append(Event(45455, ['L0__45455_67_3_1', 'L0__45455_67_3_2', 'L0__45455_67_3_3', 'L0__45455_238_1_3', 'L0__45455_238_1_2', 'L0__45455_238_1_1']))
+# Mama
+# Don Pasquale 27 Setembre
+events.append(Event(46235, ['L0__46235_60_3_1', 'L0__46235_60_3_2', 'L0__46235_60_3_3']))# Llotja dreta
+events.append(Event(46235, ['L0__46235_70_3_1', 'L0__46235_70_3_2', 'L0__46235_70_3_3']))# Llotja esquerra
+events.append(Event(46235, ['L0__46235_54_1_3', 'L0__46235_54_1_4', 'L0__46235_54_1_5']))# Seient davant la Llotja
+events.append(Event(46235, ['L0__46235_15_1_7', 'L0__46235_15_1_8', 'L0__46235_225_5_13']))# Platea algo darrera centrat
 
-# Norma 19 Juliol
-events.append(Event(45474, ['L0__45474_69_3_1', 'L0__45474_69_3_2', 'L0__45474_69_3_3']))
 
 chromeDriverPath = 'C:\Program Files\ChromeDriver\chromedriver.exe'
 chromeOptions = Options()
