@@ -18,19 +18,17 @@ class Event:
 
 events = []
 
-#Il Trittico
-# Dimarts 13
-events.append(Event(46259, ['L0__46259_68_3_1', 'L0__46259_68_3_2', 'L0__46259_68_3_3', 'L0__46259_69_3_1', 'L0__46259_69_3_2', 'L0__46259_69_3_3'])) # Llotja bona i backup
-
-# Dimecres 7 (Back Up)
-events.append(Event(46260, ['L0__46260_68_3_1', 'L0__46260_68_3_2', 'L0__46260_68_3_3', 'L0__46260_69_3_1', 'L0__46260_69_3_2', 'L0__46260_69_3_3'])) # Llotja bona
+#Parsifal
+# Diumenge 28
+events.append(Event(46314, ['L0__46314_68_3_1', 'L0__46314_68_3_2', 'L0__46314_68_3_3', 'L0__46314_68_2_1', 'L0__46314_68_2_2', 'L0__46314_70_3_1', 'L0__46314_70_3_2', 'L0__46314_70_3_3']))
 
 
-chromeDriverPath = 'C:\Program Files\ChromeDriver\chromedriver.exe'
+chromeDriverPath = '.\chromedriver_win32\chromedriver.exe'
 chromeOptions = Options()
 chromeOptions.add_argument("--headless")
 chromeOptions.add_argument("--log-level=2")
 chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
+chromeOptions.binary_location = '.\chrome-win\chrome.exe'
 
 print('Starting...')
 
@@ -38,7 +36,7 @@ baseUrl = 'https://liceubarcelona.koobin.com/index.php?action=PU_evento&Ev_id='
 
 while 1:
     log = open('log.txt', 'a')
-    log.write('Waking up: ' + datetime.now().__str__() + '\n')
+    log.write('Waking up: ' + str(datetime.now())+ '\n')
     ser = Service(chromeDriverPath)
     driver = webdriver.Chrome(service=ser, options=chromeOptions)
     for event in events:
