@@ -22,6 +22,10 @@ events = []
 # Diumenge 28
 events.append(Event(46314, ['L0__46314_68_3_1', 'L0__46314_68_3_2', 'L0__46314_68_3_3', 'L0__46314_68_2_1', 'L0__46314_68_2_2', 'L0__46314_70_3_1', 'L0__46314_70_3_2', 'L0__46314_70_3_3']))
 
+#Manon
+# Diumenge 23
+events.append(Event(46309, ['L0__46309_68_3_1', 'L0__46309_68_3_2', 'L0__46309_68_3_1', 'L0__46309_68_2_1', 'L0__46309_68_2_2']))
+
 
 chromeDriverPath = '.\chromedriver_win32\chromedriver.exe'
 chromeOptions = Options()
