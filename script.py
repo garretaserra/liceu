@@ -7,56 +7,93 @@ from selenium.webdriver.remote.remote_connection import LOGGER
 from selenium.common.exceptions import NoSuchElementException
 import logging
 import time
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
 
 # Reduce verbosity of chrome driver
 LOGGER.setLevel(logging.ERROR)
+
 
 class Event:
     def __init__(self, eventId, seats):
         self.eventId = eventId
         self.seats = seats
 
+
 events = []
 
-#Parsifal
+# Parsifal
 # Diumenge 28
-events.append(Event(46314, ['L0__46314_68_3_1', 'L0__46314_68_3_2', 'L0__46314_68_3_3', 'L0__46314_68_2_1', 'L0__46314_68_2_2', 'L0__46314_70_3_1', 'L0__46314_70_3_2', 'L0__46314_70_3_3']))
+# Galliner
+# events.append(Event(46314, ['L0__46314_174_1_1', 'L0__46314_174_1_2', 'L0__46314_174_1_3', 'L0__46314_174_1_4', 'L0__46314_174_1_5', 'L0__46314_174_1_6']))
 
-#Manon
-# Diumenge 23
-events.append(Event(46309, ['L0__46309_68_3_3', 'L0__46309_68_3_2', 'L0__46309_68_3_1', 'L0__46309_68_2_1', 'L0__46309_68_2_2']))
+# Bones
+events.append(
+    Event(
+        46314,
+        [
+            "L0__46314_68_1_1",
+            "L0__46314_68_1_2",
+            "L0__46314_68_1_3",
+            "L0__46314_68_3_1",
+            "L0__46314_68_3_2",
+            "L0__46314_68_2_1",
+            "L0__46314_68_2_2",
+            "L0__46314_70_3_1",
+            "L0__46314_70_3_2",
+            "L0__46314_70_3_3",
+            "L0__46314_66_3_1",
+            "L0__46314_66_3_2",
+            "L0__46314_66_3_3",
+        ],
+    )
+)
 
+# Check environment variables
+chrome_location = os.getenv("CHROME_LOCATION")
+chromeDriverPath = os.getenv("CHROME_DRIVER_LOCATION")
+if chrome_location is None:
+    print("CHROME_LOCATION environment variable is missing")
+    exit(1)
+if chromeDriverPath is None:
+    print("CHROME_DRIVER_LOCATION environment variable is missing")
+    exit(1)
 
-chromeDriverPath = '.\chromedriver_win32\chromedriver.exe'
 chromeOptions = Options()
 chromeOptions.add_argument("--headless")
 chromeOptions.add_argument("--log-level=2")
-chromeOptions.add_experimental_option('excludeSwitches', ['enable-logging'])
-chromeOptions.binary_location = '.\chrome-win\chrome.exe'
+chromeOptions.add_experimental_option("excludeSwitches", ["enable-logging"])
+chromeOptions.binary_location = chrome_location
 
-print('Starting...')
 
-baseUrl = 'https://liceubarcelona.koobin.com/index.php?action=PU_evento&Ev_id='
+print("Starting...")
+
+baseUrl = "https://liceubarcelona.koobin.com/index.php?action=PU_evento&Ev_id="
 
 while 1:
-    log = open('log.txt', 'a')
-    log.write('Waking up: ' + str(datetime.now())+ '\n')
-    ser = Service(chromeDriverPath)
-    driver = webdriver.Chrome(service=ser, options=chromeOptions)
+    log = open("log.txt", "a")
+    log.write("Waking up: " + str(datetime.now()) + "\n")
+    chromeDriverService = Service(chromeDriverPath)
+    driver = webdriver.Chrome(service=chromeDriverService, options=chromeOptions)
     for event in events:
         try:
             driver.get(baseUrl + str(event.eventId))
             time.sleep(10)  # Time to load web page
-        
-            cookies = driver.find_element(By.ID, 'CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelectionWrapper')
+            cookies = driver.find_element(
+                By.ID,
+                "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowallSelectionWrapper",
+            )
             cookies.click()
             time.sleep(2)
 
         except NoSuchElementException as e:
             pass
-        
+
         except Exception as e:
-            log.write('Exception raised: ' + str(e) + '\n')
+            log.write("Exception raised: " + str(e) + "\n")
             print(e)
 
         # Check connection
@@ -65,39 +102,49 @@ while 1:
             for seatId in event.seats:
                 # Check seat availability
                 seat = driver.find_element(By.ID, seatId)
-                status = seat.get_attribute('class')
-                if status == 'o':
+                status = seat.get_attribute("class")
+                if status == "o":
                     # Seat is occupied
-                    log.write(str(seatId) + ' is occupied\n')
-                elif status != 'a':
+                    log.write(str(seatId) + " is occupied\n")
+                elif status != "a":
                     # Seat in unknown state
-                    log.write(str(seatId) + ' is in unknown state: ' + status + '\n')
-                elif status == 'a':
+                    log.write(str(seatId) + " is in unknown state: " + status + "\n")
+                elif status == "a":
                     # Click seat
                     seat.click()
 
                     # Confirm low visibility pop up
-                    #ok_btn = driver.find_elements_by_tag_name('button').pop()
-                    #ok_btn.click()
-                    log.write(str(seatId) + '\t' + ' has been reserved at: ' + str(datetime.now()) + '\n')
+                    # ok_btn = driver.find_element(By.TAG_NAME, 'button')
+                    # ok_btn.click()
+                    log.write(
+                        str(seatId)
+                        + "\t"
+                        + " has been reserved at: "
+                        + str(datetime.now())
+                        + "\n"
+                    )
                     seats_reserved.append(seatId)
 
             if len(seats_reserved) > 0:
                 # Click on continue (with purchase)
-                cont_btn = driver.find_element(By.CLASS_NAME, 'Lboto2')
+                cont_btn = driver.find_element(By.CLASS_NAME, "Lboto2")
                 if cont_btn.is_displayed():
                     cont_btn.click()
-                    print(str(datetime.now()), 'Reserved seats:', '\t'.join(str(x) for x in seats_reserved))
+                    print(
+                        str(datetime.now()),
+                        "Reserved seats:",
+                        "\t".join(str(x) for x in seats_reserved),
+                    )
                 else:
-                    print('ERROR: Couldn\'t find buy button')
+                    print("ERROR: Couldn't find buy button")
                 time.sleep(5)
 
         except Exception as e:
-            log.write('Exception raised: ' + str(e) + '\n')
+            log.write("Exception raised: " + str(e) + "\n")
             print(e)
 
     log.close()
     driver.quit()
     time.sleep(1)
 
-print('Exiting...')
+print("Exiting...")
