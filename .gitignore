@@ -3,3 +3,6 @@ log.txt
 __pycache__/email.cpython-39.pyc
 chrome-win/
 chromedriver_win32/
+.env
+env/*
+.vscode
