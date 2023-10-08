@@ -17,37 +17,53 @@ load_dotenv()
 LOGGER.setLevel(logging.ERROR)
 
 
+class Seat:
+    def __init__(self, seatId: str) -> None:
+        self.seatId = seatId
+        self.nextUpdate: datetime = datetime.now()
+        self.historic: list[datetime] = []
+
+
 class Event:
-    def __init__(self, eventId, seats):
+    def __init__(self, eventId: int, seats: list[Seat]):
         self.eventId = eventId
         self.seats = seats
 
 
-events = []
+events: list[Event] = []
 
-# Parsifal
-# Diumenge 28
-# Galliner
-# events.append(Event(46314, ['L0__46314_174_1_1', 'L0__46314_174_1_2', 'L0__46314_174_1_3', 'L0__46314_174_1_4', 'L0__46314_174_1_5', 'L0__46314_174_1_6']))
+events.append(
+    Event(
+        46314,
+        [
+            Seat("L0__46314_174_1_1"),
+            Seat("L0__46314_174_1_2"),
+            Seat("L0__46314_174_1_3"),
+            Seat("L0__46314_174_1_4"),
+            Seat("L0__46314_174_1_5"),
+            Seat("L0__46314_174_1_6"),
+        ],
+    )
+)
 
 # Bones
 events.append(
     Event(
         46314,
         [
-            "L0__46314_68_1_1",
-            "L0__46314_68_1_2",
-            "L0__46314_68_1_3",
-            "L0__46314_68_3_1",
-            "L0__46314_68_3_2",
-            "L0__46314_68_2_1",
-            "L0__46314_68_2_2",
-            "L0__46314_70_3_1",
-            "L0__46314_70_3_2",
-            "L0__46314_70_3_3",
-            "L0__46314_66_3_1",
-            "L0__46314_66_3_2",
-            "L0__46314_66_3_3",
+            Seat("L0__46314_68_1_1"),
+            Seat("L0__46314_68_1_2"),
+            Seat("L0__46314_68_1_3"),
+            Seat("L0__46314_68_3_1"),
+            Seat("L0__46314_68_3_2"),
+            Seat("L0__46314_68_2_1"),
+            Seat("L0__46314_68_2_2"),
+            Seat("L0__46314_70_3_1"),
+            Seat("L0__46314_70_3_2"),
+            Seat("L0__46314_70_3_3"),
+            Seat("L0__46314_66_3_1"),
+            Seat("L0__46314_66_3_2"),
+            Seat("L0__46314_66_3_3"),
         ],
     )
 )
@@ -99,31 +115,31 @@ while 1:
         # Check connection
         try:
             seats_reserved = []
-            for seatId in event.seats:
+            for seat in event.seats:
                 # Check seat availability
-                seat = driver.find_element(By.ID, seatId)
-                status = seat.get_attribute("class")
+                seatElement = driver.find_element(By.ID, seat.seatId)
+                status = seatElement.get_attribute("class")
                 if status == "o":
                     # Seat is occupied
-                    log.write(str(seatId) + " is occupied\n")
+                    log.write(str(seat.seatId) + " is occupied\n")
                 elif status != "a":
                     # Seat in unknown state
-                    log.write(str(seatId) + " is in unknown state: " + status + "\n")
+                    log.write(str(seat.seatId) + " is in unknown state: " + status + "\n")
                 elif status == "a":
                     # Click seat
-                    seat.click()
+                    seatElement.click()
 
                     # Confirm low visibility pop up
                     # ok_btn = driver.find_element(By.TAG_NAME, 'button')
                     # ok_btn.click()
                     log.write(
-                        str(seatId)
+                        str(seat.seatId)
                         + "\t"
                         + " has been reserved at: "
                         + str(datetime.now())
                         + "\n"
                     )
-                    seats_reserved.append(seatId)
+                    seats_reserved.append(seat.seatId)
 
             if len(seats_reserved) > 0:
                 # Click on continue (with purchase)
