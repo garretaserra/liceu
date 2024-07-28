@@ -16,4 +16,4 @@ Find the seat selection page for the event and check in the url query prameters 
 Afterwards hover over the wanted seat inspect it by right click -> inspect. Each seat is a \<div\> element with an id. The id is the seatId used to identify the wanted seats.
 
 ## Running
-Simply run `python script.py` of if OS is windows you can also execute the bot.bat file
+Simply run `python script.py` or if the OS is windows you can also execute the bot.bat file
